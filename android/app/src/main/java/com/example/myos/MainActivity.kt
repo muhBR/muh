@@ -1,5 +1,7 @@
 package com.example.myos
 
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
@@ -8,4 +10,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
+}
 }
