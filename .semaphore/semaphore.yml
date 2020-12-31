@@ -4,12 +4,52 @@ agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
+  # containers:
+  #   - name: main
+  #     image: 'registry.semaphoreci.com/android:29'
 blocks:
-  - name: Gradle
+  - name: Backend
+    dependencies: []
     task:
       jobs:
-        - name: Build
+        - name: lint / unit
+          priority:
+          - value: 70
+            when: "branch != 'main'"
           commands:
             - checkout
-            - sem-version java 1.8
-            - ./gradlew build
+            - docker-compose up -d muh_rails_server
+            - 'docker-compose exec muh_rails_server rake db:create db:migrate'
+            - 'docker-compose exec muh_rails_server rubocop'
+            - 'docker-compose exec muh_rails_server rspec'
+  - name: Android
+    dependencies: []
+    task:
+      jobs:
+        - name: gradlew lint
+          commands:
+            - checkout
+            - docker-compose up -d muh_android
+            - 'docker-compose exec muh_android ./gradlew lint'
+        - name: bundle
+          commands:
+            - checkout
+            - docker-compose up -d muh_android
+            - 'docker-compose exec muh_android ./gradlew bundle'
+        - name: dependencies
+          commands:
+            - checkout
+            - docker-compose up -d muh_android
+            - 'docker-compose exec muh_android ./gradlew androidDependencies'
+        - name: ktlint
+          commands:
+            - checkout
+            - docker-compose up -d muh_android
+            - "docker-compose exec muh_android curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.39.0/ktlint"
+            - "docker-compose exec muh_android chmod a+x ktlint"
+            - "docker-compose exec muh_android ./ktlint"
+        - name: unit test
+          commands:
+            - checkout
+            - docker-compose up -d muh_android
+            - 'docker-compose exec muh_android ./gradlew test'

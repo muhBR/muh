@@ -22,7 +22,7 @@ module Auth
 
     def authorize_request
       header = request.headers['Authorization']
-      header = header.split(' ').last if header
+      header = header.split.last if header
       begin
         @current_user = user_by_token(header)
       rescue ActiveRecord::RecordNotFound => e
@@ -36,7 +36,7 @@ module Auth
       header = request.headers['Authorization']
       return unless header
 
-      header = header.split(' ').last
+      header = header.split.last
       begin
         @current_user = user_by_token(header)
       rescue JWT::DecodeError => e
