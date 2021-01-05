@@ -1,5 +1,3 @@
-inherit_from: .rubocop_todo.yml
-
 require: rubocop-rails
 
 AllCops:
@@ -15,7 +13,6 @@ AllCops:
     - 'bin/**/*'
     - 'log/**/*'
     - 'vendor/**/*'
-    - 'spec/**/*'
   TargetRubyVersion: 2.6.2
 
 Layout/LineLength:
@@ -26,6 +23,9 @@ Style/Documentation:
 
 Metrics/AbcSize:
   Max: 80
+
+Metrics/BlockLength:
+  IgnoredMethods: ['describe', 'context']
 
 Metrics/ClassLength:
   Max: 200

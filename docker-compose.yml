@@ -1,27 +1,28 @@
 version: "3"
 services:
-  muh_db_pg:
+  muh_postgres_db:
     image: postgres
-    container_name: muh_db_pg
+    container_name: muh_postgres_db
     volumes:
-      - muh_db_pg_volume:/data/postgres
-
+      - muh_postgres_db_volume:/data/postgres
     environment:
-      POSTGRES_PASSWORD: "postgres"
-      POSTGRES_HOST_AUTH_METHOD: "trust"
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_HOST_AUTH_METHOD: 'trust'
     ports:
-      - "5444:5432"
-
+      - '5444:5432'
   muh_rails_server:
     image: edimossilva/muh_rails_server:latest
     container_name: muh_rails_server
     volumes:
       - ./backend:/app
     depends_on:
-      - muh_db_pg
+      - muh_postgres_db
     environment:
-      RUBYOPT: "-W:no-deprecated -W:no-experimental"
-      RAILS_MASTER_KEY: "a667717bf0a47475b0582547379c816d"
+      RAILS_MASTER_KEY: 'a667717bf0a47475b0582547379c816d'
+      DATABASE_USERNAME: 'postgres'
+      DATABASE_PASSWORD: 'postgres'
+      DATABASE_HOST: 'muh_postgres_db'
+      DATABASE_PORT: '5432'
     tty: true
     command: rails s -b 0
     ports:
@@ -36,7 +37,7 @@ services:
     tty: true
     command: sh
 volumes:
-  muh_db_pg_volume:
+  muh_postgres_db_volume:
 # docker-compose build
 # docker-compose up -d
 # docker-compose exec muh_rails_server rake db:create db:migrate db:seed

@@ -1,20 +1,20 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  database: boiler_plate_database
   pool: 5
-  username: postgres
-  password: postgres
-  host: muh_db_pg
+  username: <%= ENV.fetch("DATABASE_USERNAME") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD") %>
+  host: <%= ENV.fetch("DATABASE_HOST") %>
+  port: <%= ENV.fetch("DATABASE_PORT") %>
 
 development:
   <<: *default
-  database: db/development
+  database: muh_db/development
 
 test:
   <<: *default
-  database: db/test
+  database: muh_db/test
 
 production:
   <<: *default
-  database: db/production
+  database: muh_db/production
