@@ -10,6 +10,7 @@ services:
       POSTGRES_HOST_AUTH_METHOD: 'trust'
     ports:
       - '5444:5432'
+
   muh_rails_server:
     image: edimossilva/muh_rails_server:latest
     container_name: muh_rails_server
