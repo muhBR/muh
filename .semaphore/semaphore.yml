@@ -4,9 +4,6 @@ agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
-  # containers:
-  #   - name: main
-  #     image: 'registry.semaphoreci.com/android:29'
 blocks:
   - name: Backend
     dependencies: []
@@ -14,14 +11,14 @@ blocks:
       jobs:
         - name: lint / unit
           priority:
-          - value: 70
-            when: "branch != 'main'"
+            - value: 70
+              when: branch != 'main'
           commands:
             - checkout
             - docker-compose up -d muh_rails_server
             - 'docker-compose exec muh_rails_server rake db:create db:migrate'
-            - 'docker-compose exec muh_rails_server rubocop'
-            - 'docker-compose exec muh_rails_server rspec'
+            - docker-compose exec muh_rails_server rubocop
+            - docker-compose exec muh_rails_server rspec
   - name: Android
     dependencies: []
     task:
@@ -30,26 +27,20 @@ blocks:
           commands:
             - checkout
             - docker-compose up -d muh_android
-            - 'docker-compose exec muh_android ./gradlew lint'
-        - name: bundle
+            - docker-compose exec muh_android ./gradlew lint
+        - name: bundle & dependencies
           commands:
             - checkout
             - docker-compose up -d muh_android
-            - 'docker-compose exec muh_android ./gradlew bundle'
-        - name: dependencies
+            - docker-compose exec muh_android ./gradlew bundle
+            - docker-compose up -d muh_android
+            - docker-compose exec muh_android ./gradlew androidDependencies
+        - name: ktlint & unit test
           commands:
             - checkout
             - docker-compose up -d muh_android
-            - 'docker-compose exec muh_android ./gradlew androidDependencies'
-        - name: ktlint
-          commands:
-            - checkout
+            - 'docker-compose exec muh_android curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.39.0/ktlint'
+            - docker-compose exec muh_android chmod a+x ktlint
+            - docker-compose exec muh_android ./ktlint
             - docker-compose up -d muh_android
-            - "docker-compose exec muh_android curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.39.0/ktlint"
-            - "docker-compose exec muh_android chmod a+x ktlint"
-            - "docker-compose exec muh_android ./ktlint"
-        - name: unit test
-          commands:
-            - checkout
-            - docker-compose up -d muh_android
-            - 'docker-compose exec muh_android ./gradlew test'
+            - docker-compose exec muh_android ./gradlew test
