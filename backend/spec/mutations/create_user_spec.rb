@@ -22,4 +22,18 @@ RSpec.describe Mutations::CreateUser do
       expect(subject.id).to_not be_nil
     end
   end
+  describe 'when data is not valid' do
+    let(:invalid_email) { 'invalid_email.com' }
+    let(:valid_password) { 'secret' }
+
+    subject do
+      perform(email: invalid_email, password: valid_password)
+    end
+
+    it { is_expected.to be_a(GraphQL::ExecutionError) }
+
+    it 'returns with proper data' do
+      expect(subject.message).to eq('Invalid input: Email is invalid')
+    end
+  end
 end
