@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Requirements
+1. docker
+1. docker-compose
 
-Things you may want to cover:
+## Install
 
-* Ruby version
+1. docker-compose up -d muh_rails_server
+1. docker-compose exec muh_rails_server rake db:create db:migrate db:seed
+1. docker-compose exec muh_rails_server rspec
+1. access http://localhost:3000
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

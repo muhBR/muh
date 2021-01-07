@@ -4,7 +4,7 @@ services:
     image: postgres
     container_name: muh_postgres_db
     volumes:
-      - muh_postgres_db_volume:/data/postgres
+      - muh_postgres_db_volume:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: 'postgres'
       POSTGRES_HOST_AUTH_METHOD: 'trust'
@@ -24,6 +24,7 @@ services:
       DATABASE_PASSWORD: 'postgres'
       DATABASE_HOST: 'muh_postgres_db'
       DATABASE_PORT: '5432'
+      DATABASE_NAME: 'muh_db'
     tty: true
     command: rails s -b 0
     ports:
@@ -37,6 +38,7 @@ services:
       - ./android:/app
     tty: true
     command: sh
+
 volumes:
   muh_postgres_db_volume:
 # docker-compose build

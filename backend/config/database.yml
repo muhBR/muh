@@ -1,6 +1,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  database: <%= ENV.fetch("DATABASE_NAME") %>
   pool: 5
   username: <%= ENV.fetch("DATABASE_USERNAME") %>
   password: <%= ENV.fetch("DATABASE_PASSWORD") %>
@@ -9,12 +10,12 @@ default: &default
 
 development:
   <<: *default
-  database: muh_db/development
+  database: db/development
 
 test:
   <<: *default
-  database: muh_db/test
+  database: db/test
 
 production:
   <<: *default
-  database: muh_db/production
+  database: db/production
