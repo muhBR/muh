@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">myos</string>
+
+    <!--Screen Login-->
+    <string name="login_tile">Login</string>
+    <string name="enter_username_hint">Digite seu email</string>
+    <string name="enter_password_hint">Digite sua senha</string>
+    <string name="rememberme">Lembrar senha</string>
+    <string name="forget_password">Esqueceu sua senha ?</string>
+    <string name="create_account">Criar conta</string>
+
 </resources>
