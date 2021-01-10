@@ -25,6 +25,7 @@ services:
       DATABASE_HOST: 'muh_postgres_db'
       DATABASE_PORT: '5432'
       DATABASE_NAME: 'muh_db'
+      JWT_SECRET_KEY: 'super_secret'
     tty: true
     command: rails s -b 0
     ports:

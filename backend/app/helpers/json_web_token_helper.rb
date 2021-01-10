@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module JsonWebTokenHelper
-  SECRET_KEY = 'super_secret_key'
+  JWT_SECRET_KEY = ENV.fetch('JWT_SECRET_KEY')
 
   def encode_user(user, exp = 1.day.from_now)
     payload = {}
@@ -9,7 +9,7 @@ module JsonWebTokenHelper
     payload[:user_id] = user.id
     payload[:email] = user.email
 
-    JWT.encode(payload, SECRET_KEY)
+    JWT.encode(payload, JWT_SECRET_KEY)
   end
 
   def user_by_token(token)
@@ -22,7 +22,7 @@ module JsonWebTokenHelper
   private
 
   def decode_token(token)
-    decoded = JWT.decode(token, SECRET_KEY)[0]
+    decoded = JWT.decode(token, JWT_SECRET_KEY)[0]
     HashWithIndifferentAccess.new decoded
   end
 end
