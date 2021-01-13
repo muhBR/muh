@@ -1,0 +1,21 @@
+# .semaphore/production-deploy.yml
+version: v1.0
+name: Heroku deploy backend
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Docker deploy
+    task:
+      jobs:
+        - name: 'deploy'
+          commands:
+            - checkout
+            - 'curl https://cli-assets.heroku.com/install.sh | sh'
+            - heroku container:login
+            - heroku container:push web --recursive -a=muhos
+            - heroku container:release web -a=muhos
+            - heroku run rails db:migrate db:seed -a=muhos
+      secrets:
+          - name: muh-secrets

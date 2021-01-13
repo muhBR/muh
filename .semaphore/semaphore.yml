@@ -1,5 +1,5 @@
 version: v1.0
-name: Android
+name: Muh
 agent:
   machine:
     type: e1-standard-2
@@ -15,10 +15,14 @@ blocks:
               when: branch != 'main'
           commands:
             - checkout
+            - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
             - docker-compose up -d muh_rails_server
             - 'docker-compose exec muh_rails_server rake db:create db:migrate'
             - docker-compose exec muh_rails_server rubocop
             - docker-compose exec muh_rails_server rspec
+      secrets:
+          - name: muh-secrets
+
   - name: Android
     dependencies: []
     task:
@@ -44,3 +48,6 @@ blocks:
             - docker-compose exec muh_android ./ktlint
             - docker-compose up -d muh_android
             - docker-compose exec muh_android ./gradlew test
+promotions:
+  - name: Heroku deploy backend
+    pipeline_file: heroku-deploy-backend.yml

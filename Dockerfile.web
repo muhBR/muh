@@ -1,0 +1,32 @@
+FROM ruby:3.0.0
+
+# update apt cache and install dependencies
+RUN apt-get update && apt-get install git curl build-essential libssl-dev libreadline-dev zlib1g-dev sqlite3 libsqlite3-dev nano postgresql-client -y
+
+# install recent node
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN apt-get update && apt-get install nodejs -y
+
+# install recent yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update && apt-get install yarn -y
+
+# install bundler and rubocop
+RUN gem install bundler rubocop-rails
+
+# config home environment
+WORKDIR /app
+
+COPY ./backend /app
+
+RUN bundle install
+
+RUN mkdir -p tmp/pids
+
+CMD bundle exec puma -C config/puma.rb
+# heroku container:login
+# heroku container:push web --recursive -a=muhos
+# heroku container:release web -a=muhos
+# heroku run rails db:migrate db:seed -a=muhos
+
