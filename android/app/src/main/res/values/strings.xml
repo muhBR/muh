@@ -9,4 +9,10 @@
     <string name="forget_password">Esqueceu sua senha ?</string>
     <string name="create_account">Criar conta</string>
 
+
+    <!--Screen Create Account-->
+    <string name="create_account_title">Criar conta</string>
+    <string name="create_account_button">Cadastrar</string>
+
+
 </resources>

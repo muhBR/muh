@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.LoginActivity"
+    tools:context=".ui.CreateAccountActivity"
     android:background="@color/color_primary"
     android:padding="30dp"
     >
@@ -14,17 +14,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="@drawable/ic_back"-->
-<!--            android:padding="5dp">-->
-<!--        </ImageView>-->
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_back"
+                    android:padding="5dp">
+                </ImageView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/login_tile"
+            android:text="@string/create_account_title"
             android:textColor="@color/white"
             android:gravity="center"
             android:layout_gravity="center"
@@ -92,61 +92,18 @@
                 </com.google.android.material.textfield.TextInputEditText>
 
             </com.google.android.material.textfield.TextInputLayout>
-
         </LinearLayout>
-
-        <RelativeLayout
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/rememberme"
-                android:buttonTint="@color/white"
-                android:textColor="@color/white"
-                android:layout_centerVertical="true"
-                style="@style/Widget.AppCompat.CompoundButton.CheckBox">
-            </CheckBox>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/forget_password"
-                android:visibility="gone"
-                android:background="@android:color/transparent"
-                android:textAllCaps="false"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true">
-
-            </Button>
-
-
-        </RelativeLayout>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/login_tile"
+            android:layout_marginTop="30dp"
+            android:text="@string/create_account_button"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:layout_weight="1"
             android:background="@color/color_button">
         </Button>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/create_account"
-            android:textColor="@color/color_primary"
-            android:textAllCaps="false"
-            android:layout_gravity="center"
-            android:background="@color/white">
-        </Button>
-
     </LinearLayout>
-
 </ScrollView>
