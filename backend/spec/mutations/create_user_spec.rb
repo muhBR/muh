@@ -34,8 +34,7 @@ RSpec.describe Mutations::CreateUser, type: :request do
     end
 
     it 'returns proper error message' do
-      error_message = json_response_error_message
-      expect(error_message).to eq('Invalid input: Email is invalid')
+      expect(json_response_error_message).to eq('Invalid input: Email is invalid')
     end
   end
 
