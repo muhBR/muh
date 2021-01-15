@@ -11,6 +11,7 @@ require 'support/factory_bot'
 require 'faker'
 # rubocop:disable Style/MixinUsage
 include GraphqlHelper
+include JsonWebTokenHelper
 # rubocop:enable Style/MixinUsage
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
