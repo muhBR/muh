@@ -3,7 +3,7 @@
 module JsonWebTokenHelper
   JWT_SECRET_KEY = ENV.fetch('JWT_SECRET_KEY')
 
-  def authorize_request
+  def fetch_current_user
     header = request.headers['Authorization']
     token = header.split.last if header
     # rubocop:disable Rails/HelperInstanceVariable
@@ -29,6 +29,10 @@ module JsonWebTokenHelper
   def current_user
     @current_user
     # rubocop:enable Rails/HelperInstanceVariable
+  end
+
+  def authenticated?
+    current_user.present?
   end
 
   private

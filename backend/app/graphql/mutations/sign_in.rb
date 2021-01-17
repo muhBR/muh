@@ -7,12 +7,9 @@ module Mutations
 
     def resolve(email: nil, password: nil)
       user = User.find_by(email: email)
+      raise UnauthorizedException, 'Unauthorized :(' unless user&.authenticate(password)
 
-      if user&.authenticate(password)
-        user
-      else
-        GraphQL::ExecutionError.new('Unauthorized :(')
-      end
+      user
     end
   end
 end

@@ -28,13 +28,8 @@ RSpec.describe Mutations::CreateUser, type: :request do
       graphql_post(email: invalid_email, password: valid_password)
     end
 
-    it 'returns nil data' do
-      data = json_response('createUser')
-      expect(data).to be_nil
-    end
-
     it 'returns proper error message' do
-      expect(json_response_error_message).to eq('Invalid input: Email is invalid')
+      expect(json_response_error_message).to eq('Validation failed: Email is invalid')
     end
   end
 

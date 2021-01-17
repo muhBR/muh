@@ -30,8 +30,7 @@ RSpec.describe Mutations::CreateCategory, type: :request do
     end
 
     it 'returns category data' do
-      error_message = json_response_error_message
-      expect(error_message).to eq("Invalid input: Name can't be blank")
+      expect(json_response_error_message).to eq("Validation failed: Name can't be blank")
     end
   end
 
