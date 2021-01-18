@@ -10,4 +10,15 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#FFFFFFFF</color>
+
+
+    <!--navigation drawer-->
+    <color name="shark">#202124</color>
+    <color name="shark_light">#2E2F32</color>
+    <color name="athens_gray">#FF000000</color>
+    <color name="tonys_pink">#e8e9ec</color>
+    <color name="don_juan">#594645</color>
+    <color name="shuttle_gray">#606367</color>
+    <color name="mako">#3d4043</color>
+
 </resources>

@@ -13,6 +13,20 @@
     <!--Screen Create Account-->
     <string name="create_account_title">Criar conta</string>
     <string name="create_account_button">Cadastrar</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Roanderson Pinheiro</string>
+    <string name="nav_header_subtitle">Roandersonfelipe@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Configurações</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_product">Produtos</string>
+    <string name="menu_service">Serviços</string>
+    <string name="menu_category">Categorias</string>
+    <string name="menu_orderService">Ordem de serviço</string>
+
 
 
 </resources>

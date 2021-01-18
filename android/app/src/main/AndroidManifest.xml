@@ -9,9 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Myos">
-        <activity android:name=".ui.CreateAccountActivity"></activity>
+        <activity
+            android:name=".ui.LoginActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/Theme.Myos.NoActionBar"></activity>
+        <activity android:name=".ui.CreateAccountActivity" />
         <activity android:name=".ui.MainActivity" />
-        <activity android:name=".ui.LoginActivity">
+        <activity android:name=".ui.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

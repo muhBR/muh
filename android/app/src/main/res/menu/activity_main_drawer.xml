@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_dashboard"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_serviceorder"
+            android:icon="@drawable/ic_order"
+            android:title="@string/menu_orderService" />
+        <item
+            android:id="@+id/nav_product"
+            android:icon="@drawable/ic_product"
+            android:title="@string/menu_product" />
+        <item
+            android:id="@+id/nav_category"
+            android:icon="@drawable/ic_categories"
+            android:title="@string/menu_category" />
+        <item
+            android:id="@+id/nav_service"
+            android:icon="@drawable/ic_tools"
+            android:title="@string/menu_service" />
+
+    </group>
+
+    <group
+        android:checkableBehavior="single"
+        android:id="@+id/group_two">
+        <item
+            android:id="@+id/nav_config"
+            android:icon="@drawable/ic_settings"
+            android:title="Configurações"
+            android:checked="true" />
+        <item
+            android:id="@+id/nav_avalie"
+            android:icon="@drawable/ic_like"
+            android:title="Avalie-nos"
+            android:checked="true" />
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/ic_share"
+            android:title="Compartilhar apicativo"
+            android:checked="true" />
+    </group>
+
+</menu>
