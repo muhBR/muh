@@ -2,8 +2,7 @@
 
 
 ### Semaphore CI
-[![Build Status](https://edimossilva.semaphoreci.com/badges/muh/branches/master.svg?style=shields)](https://edimossilva.semaphoreci.com/projects/muh)
-
+[![Build Status](https://edimossilva.semaphoreci.com/badges/muh/branches/main.svg?style=shields)](https://edimossilva.semaphoreci.com/projects/muh)
 
 ### Backend urls (public server for development)
 
