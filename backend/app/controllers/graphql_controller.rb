@@ -31,26 +31,15 @@ class GraphqlController < ApplicationController
 
   def execute
     if public_query? || authenticated?
-      query = params[:query]
-      operation_name = params[:operationName]
-      context = {
-        current_user: current_user
-      }
-      result = BackendSchema.execute(query, context: context, operation_name: operation_name)
+      context = { current_user: current_user }
+      result = BackendSchema.execute(params[:query], context: context)
       render json: result
     else
-      render json: { error_message: 'unauthorized :(' }, status: :unauthorized
+      render_unauthorized
     end
   end
 
   private
-
-  def handle_error_in_development(exc)
-    logger.error exc.message
-    logger.error exc.backtrace.join("\n")
-
-    render json: { errors: [{ message: exc.message, backtrace: exc.backtrace }], data: {} }, status: :internal_server_error
-  end
 
   def public_query?
     private_mutations = query_mutations - PUBLIC_ACTIONS

@@ -27,6 +27,7 @@ services:
       DATABASE_NAME: 'muh_db'
       JWT_SECRET_KEY: 'super_secret'
     tty: true
+    # command: bash
     command: rails s -b 0
     ports:
       - "3000:3000"

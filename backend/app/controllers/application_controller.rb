@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     render json: { error_message: exception.message }, status: :unprocessable_entity
   end
 
-  def render_unauthorized(message = 'Unauthorized')
+  def render_unauthorized(message = 'Unauthorized :(')
     render json: { error_message: message }, status: :unauthorized
   end
 end
