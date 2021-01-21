@@ -5,7 +5,7 @@ module Queries::Item
     type Types::Model::ItemType, null: false
 
     def resolve(id:)
-      Item.find(id)
+      Item.find_by!(id: id, user: current_user)
     end
   end
 end

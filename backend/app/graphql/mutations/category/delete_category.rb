@@ -5,7 +5,7 @@ module Mutations::Category
     type Types::Model::CategoryType
 
     def resolve(id: nil)
-      category = Category.find(id)
+      category = Category.find_by!(id: id, user: current_user)
       category.destroy!
       category
     end

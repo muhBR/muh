@@ -5,7 +5,7 @@ module Queries::Category
     type Types::Model::CategoryType, null: false
 
     def resolve(id:)
-      Category.find(id)
+      Category.find_by!(id: id, user: current_user)
     end
   end
 end

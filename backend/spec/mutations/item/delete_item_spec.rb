@@ -31,7 +31,20 @@ RSpec.describe Mutations::Item::DeleteItem, type: :request do
     end
 
     it 'returns not found message' do
-      expect(json_response_error_message).to eq("Couldn't find Item with 'id'=-1")
+      expect(json_response_error_message).to eq("Couldn't find Item")
+    end
+  end
+
+  describe 'item does not belongs to user' do
+    let!(:user2) { create(:user) }
+    let!(:user_headers2) { header_for_user(user2) }
+
+    before(:each) do
+      graphql_post(headers: user_headers2, id: item.id)
+    end
+
+    it 'returns not found message' do
+      expect(json_response_error_message).to eq("Couldn't find Item")
     end
   end
 

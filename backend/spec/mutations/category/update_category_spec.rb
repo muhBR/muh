@@ -27,9 +27,9 @@ RSpec.describe Mutations::Category::UpdateCategory, type: :request do
       graphql_post(headers: user_headers, name: '', id: category.id)
     end
 
-    it 'returns invalid input message' do
-      expect(json_response_error_message).to eq("Validation failed: Name can't be blank")
-    end
+    it { expect(json_response_error_message).to eq("Validation failed: Name can't be blank") }
+
+    it { expect(response).to have_http_status(:unprocessable_entity) }
   end
 
   describe 'when category is not found' do
@@ -37,9 +37,18 @@ RSpec.describe Mutations::Category::UpdateCategory, type: :request do
       graphql_post(headers: user_headers, name: valid_name, id: -1)
     end
 
-    it 'returns invalid input message' do
-      expect(json_response_error_message).to eq("Couldn't find Category with 'id'=-1")
+    it { expect(json_response_error_message).to eq("Couldn't find Category") }
+  end
+
+  describe 'when category belongs to other user' do
+    let!(:user2) { create(:user) }
+    let!(:user_headers2) { header_for_user(user2) }
+
+    before(:each) do
+      graphql_post(headers: user_headers2, name: valid_name, id: category.id)
     end
+
+    it { expect(json_response_error_message).to eq("Couldn't find Category") }
   end
 
   def query(name:, id:)

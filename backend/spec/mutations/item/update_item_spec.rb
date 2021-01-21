@@ -64,7 +64,23 @@ RSpec.describe Mutations::Item::UpdateItem, type: :request do
     end
 
     it 'returns invalid input message' do
-      expect(json_response_error_message).to eq("Couldn't find Item with 'id'=-1")
+      expect(json_response_error_message).to eq("Couldn't find Item")
+    end
+  end
+
+  describe 'when item not belongs to user' do
+    let!(:user2) { create(:user) }
+    let!(:user_headers2) { header_for_user(user2) }
+
+    before(:each) do
+      graphql_post(headers: user_headers2, id: item.id,
+                   name: name, item_type: item_type, description: description,
+                   sale_price: sale_price, purchase_price: purchase_price,
+                   category_id: category_id)
+    end
+
+    it 'returns invalid input message' do
+      expect(json_response_error_message).to eq("Couldn't find Item")
     end
   end
 

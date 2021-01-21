@@ -11,7 +11,7 @@ module Mutations::Item
     type Types::Model::ItemType
 
     def resolve(params)
-      item = Item.find(params[:id])
+      item = Item.find_by!(id: params[:id], user: current_user)
       item.update!(params)
       item
     end

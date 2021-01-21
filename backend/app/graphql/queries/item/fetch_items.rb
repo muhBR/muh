@@ -3,7 +3,7 @@ module Queries::Item
     type [Types::Model::ItemType], null: false
 
     def resolve
-      Item.all
+      Item.where(user: current_user)
     end
   end
 end

@@ -4,7 +4,7 @@ module Mutations::Item
     type Types::Model::ItemType
 
     def resolve(id: nil)
-      item = Item.find(id)
+      item = Item.find_by!(id: id, user: current_user)
       item.destroy!
       item
     end

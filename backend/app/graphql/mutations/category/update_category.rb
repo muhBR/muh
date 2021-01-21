@@ -7,7 +7,7 @@ module Mutations::Category
     type Types::Model::CategoryType
 
     def resolve(id:, name:)
-      category = Category.find(id)
+      category = Category.find_by!(id: id, user: current_user)
       category.update!(name: name)
       category
     end

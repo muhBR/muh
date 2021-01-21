@@ -3,7 +3,7 @@ module Queries::Category
     type [Types::Model::CategoryType], null: false
 
     def resolve
-      Category.all
+      Category.where(user: current_user)
     end
   end
 end
