@@ -7,7 +7,7 @@ RSpec.describe Queries::Item::FetchItems, type: :request do
 
   describe 'when data is valid' do
     before(:each) do
-      graphql_post(id: item.id, headers: user_headers)
+      graphql_post(params: { id: item.id }, headers: user_headers)
     end
 
     it 'returns items data' do
@@ -38,7 +38,7 @@ RSpec.describe Queries::Item::FetchItems, type: :request do
     let!(:user_headers2) { header_for_user(user2) }
 
     before(:each) do
-      graphql_post(id: item.id, headers: user_headers2)
+      graphql_post(params: { id: item.id }, headers: user_headers2)
     end
 
     it { expect(json_response_error_message).to eq("Couldn't find Item") }

@@ -6,7 +6,7 @@ RSpec.describe Mutations::User::CreateUser, type: :request do
     let(:valid_password) { 'secret' }
 
     before(:each) do
-      graphql_post(email: valid_email, password: valid_password)
+      graphql_post(params: { email: valid_email, password: valid_password })
     end
 
     it 'returns proper data' do
@@ -25,7 +25,7 @@ RSpec.describe Mutations::User::CreateUser, type: :request do
     let(:valid_password) { 'secret' }
 
     before(:each) do
-      graphql_post(email: invalid_email, password: valid_password)
+      graphql_post(params: { email: invalid_email, password: valid_password })
     end
 
     it 'returns proper error message' do

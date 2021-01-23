@@ -1,13 +1,6 @@
 module Mutations::Category
-  class DeleteCategory < Mutations::BaseMutation
-    argument :id, ID, required: true
-
+  class DeleteCategory < Mutations::Generic::DeleteMutation
+    self.resource_class = Category
     type Types::Model::CategoryType
-
-    def resolve(id: nil)
-      category = Category.find_by!(id: id, user: current_user)
-      category.destroy!
-      category
-    end
   end
 end

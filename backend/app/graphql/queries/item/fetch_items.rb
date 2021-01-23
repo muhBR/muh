@@ -1,9 +1,6 @@
 module Queries::Item
-  class FetchItems < Queries::BaseQuery
+  class FetchItems < Queries::Generic::FetchAllQuery
+    self.resource_class = Item
     type [Types::Model::ItemType], null: false
-
-    def resolve
-      Item.where(user: current_user)
-    end
   end
 end

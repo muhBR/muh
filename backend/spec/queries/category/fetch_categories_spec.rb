@@ -10,7 +10,7 @@ RSpec.describe Queries::Category::FetchCategories, type: :request do
 
   describe 'when data is valid' do
     before(:each) do
-      graphql_post(headers: user_headers)
+      graphql_post(headers: user_headers, params: {})
     end
 
     subject { json_response('fetchCategories') }

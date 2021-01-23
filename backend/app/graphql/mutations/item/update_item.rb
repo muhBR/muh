@@ -1,5 +1,7 @@
 module Mutations::Item
-  class UpdateItem < Mutations::BaseMutation
+  class UpdateItem < Mutations::Generic::UpdateMutation
+    self.resource_class = Item
+
     argument :id, ID, required: true
     argument :category_id, ID, required: false
     argument :name, String, required: false
@@ -9,11 +11,5 @@ module Mutations::Item
     argument :purchase_price, Float, required: false
 
     type Types::Model::ItemType
-
-    def resolve(params)
-      item = Item.find_by!(id: params[:id], user: current_user)
-      item.update!(params)
-      item
-    end
   end
 end

@@ -7,7 +7,7 @@ RSpec.describe Mutations::Item::DeleteItem, type: :request do
 
   describe 'when data is valid' do
     before(:each) do
-      graphql_post(headers: user_headers, id: item.id)
+      graphql_post(headers: user_headers, params: { id: item.id })
     end
 
     it 'returns item data' do
@@ -27,7 +27,7 @@ RSpec.describe Mutations::Item::DeleteItem, type: :request do
 
   describe 'when data is not valid' do
     before(:each) do
-      graphql_post(headers: user_headers, id: -1)
+      graphql_post(headers: user_headers, params: { id: -1 })
     end
 
     it 'returns not found message' do
@@ -40,7 +40,7 @@ RSpec.describe Mutations::Item::DeleteItem, type: :request do
     let!(:user_headers2) { header_for_user(user2) }
 
     before(:each) do
-      graphql_post(headers: user_headers2, id: item.id)
+      graphql_post(headers: user_headers2, params: { id: item.id })
     end
 
     it 'returns not found message' do

@@ -13,12 +13,21 @@ RSpec.describe Mutations::Item::UpdateItem, type: :request do
   let(:purchase_price) { 5.0 }
   let(:category_id) { category.id }
 
+  let(:params) do
+    {
+      id: item.id,
+      name: name,
+      item_type: item_type,
+      description: description,
+      sale_price: sale_price,
+      purchase_price: purchase_price,
+      category_id: category_id
+    }
+  end
+
   describe 'when data is valid' do
     before(:each) do
-      graphql_post(headers: user_headers, id: item.id,
-                   name: name, item_type: item_type, description: description,
-                   sale_price: sale_price, purchase_price: purchase_price,
-                   category_id: category_id)
+      graphql_post(headers: user_headers, params: params)
     end
 
     it 'returns item data' do
@@ -43,11 +52,20 @@ RSpec.describe Mutations::Item::UpdateItem, type: :request do
   end
 
   describe 'when item name is not valid' do
+    let(:invalid_params) do
+      {
+        id: item.id,
+        name: '',
+        item_type: item_type,
+        description: description,
+        sale_price: sale_price,
+        purchase_price: purchase_price,
+        category_id: category_id
+      }
+    end
+
     before(:each) do
-      graphql_post(headers: user_headers, id: item.id,
-                   name: '', item_type: item_type, description: description,
-                   sale_price: sale_price, purchase_price: purchase_price,
-                   category_id: category_id)
+      graphql_post(headers: user_headers, params: invalid_params)
     end
 
     it 'returns invalid input message' do
@@ -56,11 +74,20 @@ RSpec.describe Mutations::Item::UpdateItem, type: :request do
   end
 
   describe 'when item is not found' do
+    let(:not_found_params) do
+      {
+        id: -1,
+        name: name,
+        item_type: item_type,
+        description: description,
+        sale_price: sale_price,
+        purchase_price: purchase_price,
+        category_id: category_id
+      }
+    end
+
     before(:each) do
-      graphql_post(headers: user_headers, id: -1,
-                   name: '', item_type: item_type, description: description,
-                   sale_price: sale_price, purchase_price: purchase_price,
-                   category_id: category_id)
+      graphql_post(headers: user_headers, params: not_found_params)
     end
 
     it 'returns invalid input message' do
@@ -73,10 +100,7 @@ RSpec.describe Mutations::Item::UpdateItem, type: :request do
     let!(:user_headers2) { header_for_user(user2) }
 
     before(:each) do
-      graphql_post(headers: user_headers2, id: item.id,
-                   name: name, item_type: item_type, description: description,
-                   sale_price: sale_price, purchase_price: purchase_price,
-                   category_id: category_id)
+      graphql_post(headers: user_headers2, params: params)
     end
 
     it 'returns invalid input message' do

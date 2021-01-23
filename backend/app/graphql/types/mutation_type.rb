@@ -8,6 +8,10 @@ module Types
     field :delete_item, mutation: Mutations::Item::DeleteItem
     field :update_item, mutation: Mutations::Item::UpdateItem
 
+    field :create_customer, mutation: Mutations::Customer::CreateCustomer
+    field :update_customer, mutation: Mutations::Customer::UpdateCustomer
+    field :delete_customer, mutation: Mutations::Customer::DeleteCustomer
+
     field :create_user, mutation: Mutations::User::CreateUser
     field :sign_in, mutation: Mutations::User::SignIn
   end

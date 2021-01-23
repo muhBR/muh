@@ -1,8 +1,6 @@
 module GraphqlHelper
   def graphql_post(**args)
-    query_args = args.except(:headers)
-
-    post '/graphql', params: { query: query(**query_args) }, headers: args[:headers]
+    post '/graphql', params: { query: query(**args[:params]) }, headers: args[:headers]
   end
 
   def json_response(field_name)

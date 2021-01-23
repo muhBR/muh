@@ -11,12 +11,20 @@ RSpec.describe Mutations::Item::CreateItem, type: :request do
   let(:purchase_price) { 5.0 }
   let(:category_id) { category.id }
 
+  let(:params) do
+    {
+      name: name,
+      item_type: item_type,
+      description: description,
+      sale_price: sale_price,
+      purchase_price: purchase_price,
+      category_id: category_id
+    }
+  end
+
   describe 'when data is valid' do
     before(:each) do
-      graphql_post(headers: user_headers,
-                   name: name, item_type: item_type, description: description,
-                   sale_price: sale_price, purchase_price: purchase_price,
-                   category_id: category_id)
+      graphql_post(headers: user_headers, params: params)
     end
 
     it 'returns item data' do
@@ -35,11 +43,19 @@ RSpec.describe Mutations::Item::CreateItem, type: :request do
   end
 
   describe 'when data is not valid' do
+    let(:invalid_params) do
+      {
+        name: name,
+        item_type: 'invalid type',
+        description: description,
+        sale_price: sale_price,
+        purchase_price: purchase_price,
+        category_id: category_id
+      }
+    end
+
     before(:each) do
-      graphql_post(headers: user_headers,
-                   name: name, item_type: 'invalid_type', description: description,
-                   sale_price: sale_price, purchase_price: purchase_price,
-                   category_id: category_id)
+      graphql_post(headers: user_headers, params: invalid_params)
     end
 
     it 'returns propper error message' do

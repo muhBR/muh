@@ -8,7 +8,7 @@ RSpec.describe Mutations::Category::CreateCategory, type: :request do
     let(:valid_name) { 'category name' }
 
     before(:each) do
-      graphql_post(headers: user_headers, name: valid_name)
+      graphql_post(headers: user_headers, params: { name: valid_name })
     end
 
     it 'returns category data' do
@@ -26,7 +26,7 @@ RSpec.describe Mutations::Category::CreateCategory, type: :request do
     let(:invalid_name) { '' }
 
     before(:each) do
-      graphql_post(headers: user_headers, name: invalid_name)
+      graphql_post(headers: user_headers, params: { name: invalid_name })
     end
 
     it 'returns category data' do
@@ -38,7 +38,7 @@ RSpec.describe Mutations::Category::CreateCategory, type: :request do
     let(:valid_name) { 'category name' }
 
     before(:each) do
-      graphql_post(headers: {}, name: valid_name)
+      graphql_post(headers: {}, params: { name: valid_name })
     end
 
     it { expect(response).to have_http_status(:unauthorized) }

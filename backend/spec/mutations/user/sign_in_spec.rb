@@ -6,7 +6,7 @@ RSpec.describe Mutations::User::SignIn, type: :request do
 
   describe 'when data is valid' do
     before(:each) do
-      graphql_post(email: user.email, password: correct_password)
+      graphql_post(params: { email: user.email, password: correct_password })
     end
 
     it 'returns proper data' do
@@ -23,7 +23,7 @@ RSpec.describe Mutations::User::SignIn, type: :request do
   describe 'when data is not valid' do
     describe 'When email is invalid' do
       before(:each) do
-        graphql_post(email: 'invalid_email@gmail.com', password: correct_password)
+        graphql_post(params: { email: 'invalid_email@gmail.com', password: correct_password })
       end
 
       it 'returns error message' do
@@ -33,7 +33,7 @@ RSpec.describe Mutations::User::SignIn, type: :request do
 
     describe 'When password is invalid' do
       before(:each) do
-        graphql_post(email: user.email, password: 'wrong_password')
+        graphql_post(params: { email: user.email, password: 'wrong_password' })
       end
 
       it 'returns error message' do

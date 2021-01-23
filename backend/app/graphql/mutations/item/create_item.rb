@@ -1,5 +1,7 @@
 module Mutations::Item
-  class CreateItem < Mutations::BaseMutation
+  class CreateItem < Mutations::Generic::CreateMutation
+    self.resource_class = Item
+
     argument :name, String, required: true
     argument :item_type, String, required: true
     argument :description, String, required: true
@@ -8,12 +10,5 @@ module Mutations::Item
     argument :category_id, ID, required: true
 
     type Types::Model::ItemType
-
-    def resolve(params)
-      item = Item.new(params)
-      item.user = context[:current_user]
-      item.save!
-      item
-    end
   end
 end
