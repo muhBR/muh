@@ -1,5 +1,5 @@
 import React from 'react'
-import { useQuery, gql, QueryHookOptions } from '@apollo/client'
+import { useQuery, gql } from '@apollo/client'
 
 const EXCHANGE_RATES = gql`
   query GetExchangeRates {
