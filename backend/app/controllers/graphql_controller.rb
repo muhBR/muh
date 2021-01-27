@@ -32,7 +32,11 @@ class GraphqlController < ApplicationController
   def execute
     if public_query? || authenticated?
       context = { current_user: current_user }
-      result = BackendSchema.execute(params[:query], context: context)
+      variables = prepare_variables(params[:variables])
+      query = params[:query]
+      operation_name = params[:operationName]
+      result = BackendSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
+
       render json: result
     else
       render_unauthorized
@@ -40,6 +44,25 @@ class GraphqlController < ApplicationController
   end
 
   private
+
+  def prepare_variables(variables_param)
+    case variables_param
+    when String
+      if variables_param.present?
+        JSON.parse(variables_param) || {}
+      else
+        {}
+      end
+    when Hash
+      variables_param
+    when ActionController::Parameters
+      variables_param.to_unsafe_hash # GraphQL-Ruby will validate name and type of incoming variables.
+    when nil
+      {}
+    else
+      raise ArgumentError, "Unexpected parameter: #{variables_param}"
+    end
+  end
 
   def public_query?
     private_mutations = query_mutations - PUBLIC_ACTIONS
