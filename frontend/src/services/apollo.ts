@@ -12,8 +12,7 @@ function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined', // set to true for SSR
     link: new HttpLink({
-      // uri: 'http://muhos.herokuapp.com/graphql'
-      uri: 'http://localhost:3000/graphql'
+      uri: 'http://muhos.herokuapp.com/graphql'
     }),
     cache: new InMemoryCache()
   })

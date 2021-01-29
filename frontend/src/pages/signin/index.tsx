@@ -32,10 +32,7 @@ const SignIn: React.FC = () => {
   const handleSubmit: SubmitHandler<FormData> = data => {
     console.log(formRef, data)
     handleSubmitGql({
-      variables: {
-        email: 'roanderson1@gmail.com',
-        password: '123456'
-      }
+      variables: data
     })
   }
 
@@ -54,7 +51,10 @@ const SignIn: React.FC = () => {
       <SignUpLinkWrapper>
         <Link href="/signup">Create account</Link>
       </SignUpLinkWrapper>
-      User: {data}
+
+      <p>{data && data.signIn.email}</p>
+      <p>{data && data.signIn.id}</p>
+      <p>{data && data.signIn.token}</p>
     </Container>
   )
 }

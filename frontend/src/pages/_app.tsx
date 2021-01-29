@@ -7,7 +7,7 @@ import theme from '../styles/theme'
 import { useApollo } from '../services/apollo'
 
 const Muh: React.FC<AppProps> = ({ Component, pageProps }) => {
-  const apolloClient = useApollo(pageProps.initialApolloState);
+  const apolloClient = useApollo(pageProps.initialApolloState)
 
   return (
     <ApolloProvider client={apolloClient}>
