@@ -11,7 +11,8 @@
     "plugin:@typescript-eslint/recommended",
     "prettier/@typescript-eslint",
     "prettier/standard",
-    "prettier/react"
+    "prettier/react",
+    "plugin:jsx-a11y/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -24,7 +25,8 @@
   "plugins": [
     "react",
     "@typescript-eslint",
-    "prettier"
+    "prettier",
+    "jsx-a11y"
   ],
   "rules": {
     "prettier/prettier": "error",
