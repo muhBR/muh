@@ -4,6 +4,7 @@ RSpec.describe Item, type: :model do
   describe 'relationship' do
     it { should belong_to(:user).required }
     it { should belong_to(:category).required }
+    it { should have_many(:item_service_orders) }
   end
 
   describe 'validations' do
@@ -22,9 +23,9 @@ RSpec.describe Item, type: :model do
       it { should validate_uniqueness_of(:name).scoped_to(:user_id).case_insensitive }
     end
 
-    describe 'greater_than_or_equal_to' do
+    describe 'numericality' do
       it { should validate_numericality_of(:purchase_price).is_greater_than_or_equal_to(0) }
-      it { should validate_numericality_of(:sale_price).is_greater_than_or_equal_to(0) }
+      it { should validate_numericality_of(:sale_price).is_greater_than(0) }
     end
   end
 end

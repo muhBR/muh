@@ -3,6 +3,6 @@
 FactoryBot.define do
   factory :user do
     email { Faker::Internet.unique.email }
-    password { Faker::String.random(length: 6) }
+    password { '123456' }
   end
 end

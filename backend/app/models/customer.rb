@@ -3,6 +3,7 @@ class Customer < ApplicationRecord
   MAX_PHONE_VALUE = 99_999_999_999
 
   belongs_to :user
+  has_many :service_orders, dependent: :restrict_with_exception
 
   validates :name, presence: true, uniqueness: { scope: :user_id, case_sensitive: false }
   validates :phone, uniqueness: { scope: :user_id, case_sensitive: false }

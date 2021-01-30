@@ -4,7 +4,11 @@ module GraphqlHelper
   end
 
   def json_response(field_name)
-    JSON.parse(response.body)['data'][field_name]
+    resonse_body = response.body
+
+    raise "Response body has no 'data' #{resonse_body}" if JSON.parse(resonse_body)['data'].nil?
+
+    JSON.parse(resonse_body)['data'][field_name]
   end
 
   def json_response_error_message
