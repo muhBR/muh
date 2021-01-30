@@ -1,0 +1,47 @@
+# This file was generated based on "schema.json". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Category {
+    id: ID!
+    name: String!
+    userId: ID!
+}
+
+type Item {
+    category: Category
+    description: String!
+    id: ID!
+    itemType: String!
+    name: String!
+    purchasePrice: Float!
+    salePrice: Float!
+    userId: ID!
+}
+
+type Mutation {
+    createCategory(name: String!): Category
+    createItem(categoryId: ID!, description: String!, itemType: String!, name: String!, purchasePrice: Float!, salePrice: Float!): Item
+    createUser(email: String!, password: String!): User
+    deleteCategory(id: ID!): Category
+    deleteItem(id: ID!): Item
+    signIn(email: String!, password: String!): User
+    updateCategory(id: ID!, name: String!): Category
+    updateItem(categoryId: ID, description: String, id: ID!, itemType: String, name: String, purchasePrice: Float, salePrice: Float): Item
+}
+
+type Query {
+    fetchCategories: [Category!]!
+    fetchCategory(id: ID!): Category!
+    fetchItem(id: ID!): Item!
+    fetchItems: [Item!]!
+}
+
+type User {
+    email: String!
+    id: ID!
+    token: String!
+}

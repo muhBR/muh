@@ -1,6 +1,7 @@
 package com.example.myos.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -10,10 +11,18 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.apollographql.apollo.ApolloCall
+import com.apollographql.apollo.ApolloClient
+import com.apollographql.apollo.api.Response
+import com.apollographql.apollo.exception.ApolloException
+import com.example.CreateUserMutation
 import com.example.myos.R
+import com.example.myos.network.Network
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.Logger
 
 class HomeActivity : AppCompatActivity() {
 
@@ -24,6 +33,42 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        val apolloClient = ApolloClient.builder()
+            .serverUrl("http://muhos.herokuapp.com/graphql")
+            .build()
+
+        Logger.addLogAdapter(AndroidLogAdapter())
+
+        val upvotePostMutation = CreateUserMutation(email = "Roandersonfelipe123458@gmail.com", password = "12345678")
+
+        Network.getApolloClient(this)
+            ?.mutate(upvotePostMutation)
+            ?.enqueue(object : ApolloCall.Callback<CreateUserMutation.Data>() {
+                override fun onResponse(response: Response<CreateUserMutation.Data>) {
+                    Log.i("SUCESSO", response.toString())
+                }
+
+                override fun onFailure(e: ApolloException) {
+                    Log.e("ERRO", e.message, e)
+                }
+            }
+            )
+
+//
+//        apolloClient
+//            .mutate(createUserMutation.)
+//            .enqueue(object: ApolloCall.Callback<CreateUserMutation.Data>() {
+//                override fun onResponse(response: Response<CreateUserMutation.Data>) {
+//                    response.errors?.get(0)?.message?.let { Log.i("sucesso", it) }
+//                }
+//                override fun onFailure(e: ApolloException) {
+//                   Logger.d(e.localizedMessage?:"Error)
+//
+//                }
+//
+//            }
+//            )
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->

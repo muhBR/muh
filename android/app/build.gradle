@@ -1,7 +1,9 @@
 plugins {
     id 'com.android.application'
+    id 'com.apollographql.apollo'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -31,7 +33,16 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+//    apollo {
+//        // instruct the compiler to generate Kotlin models
+//        generateKotlinModels.set(true)
+//        customTypeMapping = [
+//                "Upload" : "com.apollographql.apollo.api.FileUpload"
+//        ]
+//    }
+
 }
+
 
 dependencies {
 
@@ -51,7 +62,27 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    implementation "com.apollographql.apollo:apollo-runtime:2.5.2"
+    implementation "com.apollographql.apollo:apollo-api:2.5.2"
+    implementation "com.apollographql.apollo:apollo-normalized-cache-sqlite:2.5.2"
+    implementation "com.apollographql.apollo:apollo-coroutines-support:2.5.2"
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
+    implementation 'com.orhanobut:logger:2.2.0'
+
+
+    implementation 'javax.annotation:jsr250-api:1.0'
+
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
+apollo {
+    generateKotlinModels.set(true)
+    graphqlSourceDirectorySet.srcDir("src/main/graphql")
+    graphqlSourceDirectorySet.include("**/*.graphql")
+    graphqlSourceDirectorySet.exclude("**/schema.json.graphql")
+}
+
+
