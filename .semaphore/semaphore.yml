@@ -20,6 +20,8 @@ blocks:
             - 'docker-compose exec muh_rails_server rake db:create db:migrate'
             - docker-compose exec muh_rails_server rubocop
             - docker-compose exec muh_rails_server rspec
+            - chmod +x ./generate_codeclimate_coverage.sh
+            - ./generate_codeclimate_coverage.sh
       secrets:
           - name: muh-secrets
 

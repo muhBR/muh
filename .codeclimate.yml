@@ -1,0 +1,4 @@
+exclude_patterns:
+ - "backend/spec/*"
+ - "frontend/"
+ - "android/"
