@@ -13,6 +13,7 @@ module Types
     field :delete_customer, mutation: Mutations::Customer::DeleteCustomer
 
     field :create_service_order, mutation: Mutations::ServiceOrder::CreateServiceOrder
+    field :update_service_order, mutation: Mutations::ServiceOrder::UpdateServiceOrder
 
     field :create_user, mutation: Mutations::User::CreateUser
     field :sign_in, mutation: Mutations::User::SignIn
