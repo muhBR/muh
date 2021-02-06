@@ -129,12 +129,8 @@ RSpec.describe Mutations::ServiceOrder::UpdateServiceOrder, type: :request do
       graphql_post(headers: user_headers, params: params_with_invalid_items)
     end
 
-    it 'returns not found item error message' do
-      expect(json_response_error_message).to eq("Couldn't find Item with 'id'=-1")
-    end
-
-    it 'does not create service order' do
-      expect(ServiceOrder.count).to eq(0)
+    it 'returns not found service order error message' do
+      expect(json_response_error_message).to eq("Couldn't find ServiceOrder")
     end
   end
 

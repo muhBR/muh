@@ -17,7 +17,7 @@ module Mutations::ServiceOrder
     type Types::Model::ServiceOrderType
 
     def resolve(params)
-      service_order = ServiceOrder.find_by(id: params[:id], user: context[:current_user])
+      service_order = ServiceOrder.find_by!(id: params[:id], user: context[:current_user])
 
       ServiceOrder.transaction do
         service_order.update!(update_params(params))

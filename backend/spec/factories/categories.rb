@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :category do
-    name { Faker::Color.unique.color_name }
+    name { Faker::Music.unique.band }
     association :user
   end
 end
