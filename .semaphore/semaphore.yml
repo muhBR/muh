@@ -8,7 +8,7 @@ blocks:
   - name: Backend
     dependencies: []
     run:
-      when: branch =~ '^(backend-)'
+      when: "branch = 'main' OR branch =~ '^(backend-)'"
     task:
       jobs:
         - name: lint / unit
