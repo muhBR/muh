@@ -53,14 +53,10 @@ class GraphqlController < ApplicationController
       else
         {}
       end
-    when Hash
-      variables_param
     when ActionController::Parameters
       variables_param.to_unsafe_hash # GraphQL-Ruby will validate name and type of incoming variables.
-    when nil
-      {}
     else
-      raise ArgumentError, "Unexpected parameter: #{variables_param}"
+      {}
     end
   end
 
