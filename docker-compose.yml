@@ -27,10 +27,10 @@ services:
       DATABASE_NAME: 'muh_db'
       JWT_SECRET_KEY: 'super_secret'
     tty: true
-    # command: bash
-    command: rails s -b 0
     ports:
       - "3000:3000"
+    entrypoint: /app/scripts/configure_database.sh
+
 
   muh_android:
     image: semaphoreci/android:29
@@ -45,7 +45,6 @@ volumes:
   muh_postgres_db_volume:
 # docker-compose build
 # docker-compose up -d
-# docker-compose exec muh_rails_server rake db:create db:migrate db:seed
 # docker-compose exec muh_rails_server rspec
 # docker build -f Dockerfile_rails . -t edimossilva/muh_rails_server
 # docker push edimossilva/muh_rails_server
